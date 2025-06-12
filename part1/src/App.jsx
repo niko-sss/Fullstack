@@ -1,4 +1,9 @@
 
+const Part = ({props}) => {
+  return (
+    <p>{props.part} {props.exercise}</p>
+  )
+}
 
 const Header = ({props}) => {
   return (
@@ -7,17 +12,23 @@ const Header = ({props}) => {
 }
 
 const Content = ({contents}) => {
+  const part1 = {
+    part: contents.part1,
+    exercise: contents.exercises1
+  }
+  const part2 = {
+    part: contents.part2,
+    exercise: contents.exercises2
+  }
+  const part3 = {
+    part: contents.part3,
+    exercise: contents.exercises3
+  }
   return (
     <>
-    <p>
-      {contents.part1} {contents.exercises1}
-    </p>
-    <p>
-      {contents.part2} {contents.exercises2}
-    </p>
-    <p>
-      {contents.part3} {contents.exercises3}
-    </p>
+    <Part props={part1} />
+    <Part props={part2} />
+    <Part props={part3} />
     </>
   )
 }
