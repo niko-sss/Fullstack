@@ -6,12 +6,11 @@ mongoose.set('strictQuery',false)
 const url = process.env.MONGODB_URI
 
 mongoose.connect(url)
-  .then(result => {
+  .then(() => {
     console.log('Connected to database')
   })
   .catch((error) => {
     console.log('Error connecting to database', error.message)
-    
   })
 
 

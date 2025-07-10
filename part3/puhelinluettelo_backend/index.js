@@ -14,9 +14,9 @@ app.use(morgan(format))
 
 const errorHandler = (error, req, res, next) => {
   if (error.message === 'CastError') {
-    return res.status(400).send({error: 'id malformed'})
+    return res.status(400).send({ error: 'id malformed' })
   } else if (error.name === 'ValidationError') {
-    return res.status(400).json({error: error.message})
+    return res.status(400).json({ error: error.message })
   }
   next(error)
 }
@@ -31,8 +31,7 @@ app.get('/info', (req, res, next) => {
   Person.find({}).then(persons => {
     res.send(`<p>Phonebook has info for ${persons.length} people<p/><p>${date}<p/>`)
   })
-  .catch(error => next(error))
-  
+    .catch(error => next(error))
   app.use(morgan('tiny'))
 
 })
@@ -41,7 +40,7 @@ app.get('/api/persons', (request, response, next) => {
   Person.find({}).then(persons => {
     response.json(persons)
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
   app.use(morgan('tiny'))
 })
 
@@ -56,7 +55,7 @@ app.get('/api/persons/:id', (request, response, next) => {
       response.status(404).end()
     }
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
   app.use(morgan('tiny'))
 })
 
@@ -67,7 +66,7 @@ app.post('/api/persons', (request, response, next) => {
 
   if (!body.name || !body.number) {
     return (
-      response.status(400).json({error: 'name or number missing'})
+      response.status(400).json({ error: 'name or number missing' })
     )
   }
   const person = new Person({
@@ -78,9 +77,9 @@ app.post('/api/persons', (request, response, next) => {
   person.save().then(savedPerson => {
     response.json(savedPerson)
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
   app.use(morgan('tiny'))
-  })
+})
 
 
 
@@ -99,18 +98,18 @@ app.put('/api/persons/:id', (request, response, next) => {
       })
     })
     .catch(error => next(error))
-    app.use(morgan('tiny'))
-  })
+  app.use(morgan('tiny'))
+})
 
 
 
 app.delete('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person.findByIdAndDelete(id)
-  .then(result => {
-    response.status(204).end()
-  })
-  .catch(error => next(error))
+    .then(() => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
   app.use(morgan('tiny'))
 })
 
