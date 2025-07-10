@@ -62,7 +62,6 @@ const ChangeNotification = ({message, setChangeMsg, setIsChanged, isChanged}) =>
       <div style={styles}>{message}</div>
     );
   } else {
-    console.log('something weird in ChangeNotification')
     return null;
   }
 }
@@ -109,7 +108,6 @@ const App = () => {
             setChangeMsg(`${personToPost.name}'s phone number change succeeded`)
           })
           .catch(error => {
-            console.log('error here', error);
             setIsChanged(false)
             setChangeMsg(`${personToPost.name} is deleted already`)
           })
@@ -125,6 +123,11 @@ const App = () => {
         setNewName('')
         setNewNumber('')
         setAddMsg(`${personObject.name} added`)
+      })
+      .catch(error => {
+        setIsChanged(false)
+        setChangeMsg(`${error.response.data.error}`)
+        
       })
   }
 
