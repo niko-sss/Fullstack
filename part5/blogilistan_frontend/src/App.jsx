@@ -56,11 +56,13 @@ const App = () => {
         'loggedUser', JSON.stringify(user)
       )
       blogService.setToken(user.token)
+      console.log(initialBlogs)
       setBlogs(initialBlogs.filter(blog => blog.user.username === user.username))
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch {
+    } catch (error){
+      console.log(error)
       setErrorMessage('Wrong username or password')
       setTimeout(() => {
         setErrorMessage(null)
@@ -73,8 +75,9 @@ const App = () => {
       <h2>Log in to application</h2>
       <form onSubmit={handleLogin}>
         <div>
-        username:
+          <label htmlFor="username">username:</label>
           <input
+            id='username'
             type="text"
             value={username}
             name="Username"
@@ -82,8 +85,9 @@ const App = () => {
           />
         </div>
         <div>
-        password:
+          <label htmlFor="password">password:</label>
           <input
+            id='password'
             type="password"
             value={password}
             name="Password"

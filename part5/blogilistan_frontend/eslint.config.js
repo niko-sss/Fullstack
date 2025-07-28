@@ -4,6 +4,9 @@ import reactPlugin from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import vitestGlobals from 'eslint-plugin-vitest-globals'
+import testingLibrary from 'eslint-plugin-testing-library'
+
 
 export default defineConfig([
   globalIgnores(['dist', 'eslint.config.js', 'vite.config.js']),
@@ -11,9 +14,11 @@ export default defineConfig([
   {
     files: ['**/*.{js,jsx}'],
     plugins: {
+      'testing-library': testingLibrary,
       react: reactPlugin,
       'react-refresh': reactRefresh,
       'react-hooks': reactHooks,
+      'vitest-globals': vitestGlobals,
     },
     languageOptions: {
       ecmaVersion: 'latest',
@@ -28,7 +33,13 @@ export default defineConfig([
         version: '18.2',
       },
     },
+    globals: {
+      ...globals.browser,
+      ...vitestGlobals.environments['vitest-globals/env'].globals,
+    },
     rules: {
+      ...testingLibrary.configs['react'].rules,
+      ...vitestGlobals.configs.recommended.rules,
       ...js.configs.recommended.rules,
       ...reactPlugin.configs.recommended.rules,
       ...reactHooks.configs['recommended'].rules,

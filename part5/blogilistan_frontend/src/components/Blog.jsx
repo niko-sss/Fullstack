@@ -10,6 +10,7 @@ const Blog = ({ blog, setSuccessMessage, blogs, setBlogs }) => {
     borderWidth: 1,
     marginBottom: 5
   }
+
   return (
     <div style={blogStyle}>
       <div style={{ marginBottom: 5, marginLeft: 5 }}>

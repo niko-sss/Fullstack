@@ -6,7 +6,8 @@ const BlogForm = ({
   setErrorMessage,
   setBlogs,
   blogs,
-  noteFormRef
+  noteFormRef,
+  mockFunc
 }) => {
 
   const [title, setNewTitle] = useState('')
@@ -36,20 +37,27 @@ const BlogForm = ({
 
   return (
     <>
-      <form onSubmit={addBlog}>
-        title: <input
+      <form onSubmit={(x) => {
+        x.preventDefault()
+        const mockData = { title, author, url }
+        mockFunc ? mockFunc(mockData) : addBlog(x)
+      }}>
+        <label htmlFor="blog-title">title:</label><input
           value={title}
           onChange={({ target }) => setNewTitle(target.value)}
+          id='blog-title'
         />
         <br />
-        author: <input
+        <label htmlFor="blog-author">author:</label><input
           value={author}
           onChange={({ target }) => setNewAuthor(target.value)}
+          id='blog-author'
         />
         <br />
-        url: <input
+        <label htmlFor="blog-url">url:</label><input
           value={url}
           onChange={({ target }) => setNewUrl(target.value)}
+          id='blog-url'
         />
         <br />
         <button type="submit">create</button>
