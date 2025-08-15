@@ -42,11 +42,7 @@ const App = () => {
   }, [user])
 
 
-
-  // LOG OUT:
-  // console: window.localStorage.removeItem('loggedUser')
-
-  const handleLogin = async(event) => {
+  const handleLogin = async (event) => {
     event.preventDefault()
     try {
       const user = await loginService.login({
@@ -61,7 +57,7 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (error){
+    } catch (error) {
       console.log(error)
       setErrorMessage('Wrong username or password')
       setTimeout(() => {
@@ -98,12 +94,6 @@ const App = () => {
       </form>
     </>
   )
-
-  // const showBlogs = async () => {
-  //   const sortedBlogs = blogs.sort((a, b) => a.likes + b.likes)
-  //   const mappedBlogs = sortedBlogs.map(blog => <Blog key={blog.id} blog={blog} setSuccessMessage={setSuccessMessage}/>)
-  //   return mappedBlogs
-  // }
 
   const logout = () => {
     try {

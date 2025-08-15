@@ -12,6 +12,7 @@ const AddNotification = ({message, setAddMsg}) => {
       setAddMsg(null)
     }, 4000)
     return () => clearTimeout(timeOut)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const styles = {
     color: 'black',
